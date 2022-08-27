@@ -7,7 +7,7 @@ section .text
 	global	_start
 
 _start:
-	mov	r15,	binstr	;Guardamos la posición de memoria en R15
+	mov	r15,	binstr	;Guardamos la posición de memoria (binstr) en R15
 	mov	r14,	128	;como son 8 bits, empezamos de 128
 	mov	r13,	2	;Divisor de las potencias de 2
 	mov	r12,	0	;Acumulador del resultado
@@ -19,7 +19,7 @@ mulbuc:
 	add	r12,	rax	;Acumulamos en R12
 sigpa:
 	xor	rdx,	rdx	;Limpiamos RDX (ver instrucciones)
-	mov	rax,	r14	;Guardamos en RAX para dividir
+	mov	rax,	r14	;Guardamos en RAX para dividir (r14=128)
 	div	r13		;Dividimos entre la potencia de 2
 	mov	r14,	rax	;Devolvemos  al divisor 
 	inc	r15		;Incrementamos posición de memoria
@@ -31,3 +31,10 @@ fin:
 	mov	rax,	60
 	mov 	rdi,	0
 	syscall
+
+;ensamblar:
+;nasm -f elf64 bin2dec.asm -o bin2dec.o
+;enlazar:
+;ld bin2dec.o -o bin2dec
+;correr el ejecutable:
+;./bin2dec
